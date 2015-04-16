@@ -463,7 +463,6 @@ public class TouchImageView extends ImageView {
         matrix.getValues(m);
         fixTransX = m[Matrix.MTRANS_X];
         fixTransY = m[Matrix.MTRANS_Y];
-        Log.d("Tag", "Translate fixTran = " + fixTransX + " fixtrany = " + fixTransY);
     }
 
     /**
@@ -525,7 +524,6 @@ public class TouchImageView extends ImageView {
         matrix.getValues(m);
         float transX = m[Matrix.MTRANS_X];
         float transY = m[Matrix.MTRANS_Y];
-        Log.d("Tag", "Matrix trx = " + transX + " try = " + transY);
         Drawable drawable = getDrawable();
         if (drawable == null || drawable.getIntrinsicWidth() == 0 || drawable.getIntrinsicHeight() == 0) {
             setMeasuredDimension(0, 0);
@@ -544,7 +542,6 @@ public class TouchImageView extends ImageView {
         matrix.getValues(m);
         transX = m[Matrix.MTRANS_X];
         transY = m[Matrix.MTRANS_Y];
-        Log.d("Tag", "Matrix trx = " + transX + " try = " + transY);
         //
         // Set view dimensions
         //
@@ -617,7 +614,6 @@ public class TouchImageView extends ImageView {
         matchViewHeight = viewHeight - redundantYSpace;
         if (!isZoomed() && !imageRenderedAtLeastOnce) {
 
-            Log.d("Tag", "Matrix isZoom " + isZoomed()+ " render= " + imageRenderedAtLeastOnce);
             //
             // Stretch and center image to fit view
             //
@@ -626,7 +622,6 @@ public class TouchImageView extends ImageView {
             normalizedScale = 1;
 
         } else {
-            Log.d("Tag", "Matrix second isZoom " + isZoomed()+ " render= " + imageRenderedAtLeastOnce);
             //
             // These values should never be 0 or we will set viewWidth and viewHeight
             // to NaN in translateMatrixAfterRotate. To avoid this, call savePreviousImageValues

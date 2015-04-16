@@ -18,18 +18,34 @@ public class HideBarController {
 
     private IHideControllerCallback mCallback = new StubCallback();
 
+
+    /**
+     * Use if you don't want that status bar will hide
+     */
+    public HideBarController(View contentView){
+        setClickOnMainView(contentView);
+    }
+
+    /**
+     * Use if you want that status bar will hide
+     */
     public HideBarController(Activity activity, View contentView){
         mActivity = activity;
+        setClickOnMainView(contentView);
+    }
+
+    private void setClickOnMainView(View contentView){
         contentView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mActivity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+                if(mActivity != null) {
+                    mActivity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+                }
                 mCallback.onVisibilityChange(true);
                 delayedHideStautus(3000);
             }
         });
     }
-
     /**
      * Call before remove screen
      */
@@ -46,7 +62,9 @@ public class HideBarController {
         @Override
         public void run() {
             mCallback.onVisibilityChange(false);
-            mActivity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            if(mActivity != null) {
+                mActivity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            }
         }
     };
 

@@ -2,4 +2,9 @@
 
     <color name="black_overlay">#66000000</color>
 
+    <color name="cardview_shadow_end_color">#03000000</color>
+    <color name="cardview_shadow_start_color">#37000000</color>
+
+    <drawable name="safe_mode_background">#60000000</drawable>
+
 </resources>

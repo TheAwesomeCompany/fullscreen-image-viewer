@@ -37,6 +37,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.fullscreen.ProgressShower;
+import com.fullscreen.ProgressShowerImpl;
 import com.fullscreen.R;
 import com.fullscreen.activity.FullScreenActivity;
 import com.fullscreen.util.ImageLoaderUtils;
@@ -150,6 +152,8 @@ public class FullScreenPhotoFragment extends Fragment {
         private ImageLoader imageLoader;
         private HideBarController mController;
 
+        private ProgressShower mProgress = new ProgressShowerImpl(getActivity());
+
         private Handler mHideHandler = new Handler();
 
         public ImagePagerAdapter(Context context, String[] promos) {
@@ -216,19 +220,23 @@ public class FullScreenPhotoFragment extends Fragment {
             imageLoader.displayImage(url, imageView, new ImageLoadingListener() {
                 @Override
                 public void onLoadingStarted(String imageUri, View view) {
+                    mProgress.showProgress();
                 }
 
                 @Override
                 public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
+                    mProgress.hideProgress();
                 }
 
                 @Override
                 public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
                     imageView.setImageBitmap(loadedImage);
+                    mProgress.hideProgress();
                 }
 
                 @Override
                 public void onLoadingCancelled(String imageUri, View view) {
+                    mProgress.hideProgress();
                 }
             });
         }

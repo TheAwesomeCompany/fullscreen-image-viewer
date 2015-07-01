@@ -7,4 +7,6 @@
 
     <string name="action_market">Go to the market</string>
 
+    <string name="error_loading_image_failed">Loading failed</string>
+
 </resources>

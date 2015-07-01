@@ -36,6 +36,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fullscreen.ProgressShower;
 import com.fullscreen.ProgressShowerImpl;
@@ -226,6 +227,7 @@ public class FullScreenPhotoFragment extends Fragment {
                 @Override
                 public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
                     mProgress.hideProgress();
+                    Toast.makeText(mContext, getString(R.string.error_loading_image_failed), Toast.LENGTH_SHORT).show();
                 }
 
                 @Override

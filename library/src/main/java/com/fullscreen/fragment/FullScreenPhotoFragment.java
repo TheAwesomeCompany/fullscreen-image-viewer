@@ -50,6 +50,8 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
+import java.io.File;
+
 /**
  * Created by dima on 4/15/15.
  */
@@ -209,7 +211,8 @@ public class FullScreenPhotoFragment extends Fragment {
             mController.setHideControllerCallback(new IHideControllerCallback() {
                 @Override
                 public void onVisibilityChange(boolean visible) {
-                    ((FullScreenActivity) getActivity()).moveActionBar(visible);
+                    ((FullScreenActivity) getActivity()).moveActionBar(
+                            visible);
                     mIndicator.setVisibility(visible ? View.VISIBLE : View.GONE);
 
                 }
@@ -221,7 +224,11 @@ public class FullScreenPhotoFragment extends Fragment {
             imageLoader.displayImage(url, imageView, new ImageLoadingListener() {
                 @Override
                 public void onLoadingStarted(String imageUri, View view) {
-                    mProgress.showProgress();
+                    //TODO Hot Fix: Bad solution should be done in another way. Added by mda
+                    File imageFile = imageLoader.getDiskCache().get(imageUri);
+                    if (!imageFile.exists() && !Uri.parse(imageUri).getScheme().equals("drawable")) {
+                        mProgress.showProgress();
+                    }
                 }
 
                 @Override
